@@ -20,19 +20,6 @@
     tags:
       - percona-server-configure-first-run-service-stop
 
-  - name: configure | remove (excessive) configuration files
-    file:
-      path: "{{ item }}"
-      state: absent
-    with_items:
-      - /etc/mysql/percona-server.cnf
-      - /etc/mysql/percona-server.conf.d
-    tags:
-      - percona-server-configure-first-run-cleanup
-  when: _mysqld_installed.rc != 0
-  tags:
-    - percona-server-configure-first-run
-
 - name: configure | update (global) configuration file
   template:
     src: etc/mysql/my.cnf.j2

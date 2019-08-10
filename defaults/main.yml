@@ -5,6 +5,9 @@ percona_server_version: 5.7
 percona_server_root_password: '+12345678'
 
 percona_server_etc_my_cnf: []
+percona_server_etc_my_cnf_includedir:
+  - /etc/mysql/conf.d/
+  - /etc/mysql/percona-xtradb-cluster.conf.d/
 
 percona_server_user_root_cnf_manage: true
 percona_server_user_root_cnf_preset:
