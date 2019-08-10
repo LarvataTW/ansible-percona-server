@@ -87,11 +87,11 @@
     - percona-server
     - percona-server-queries
 
-- include: ib-logfile.yml
-  tags:
-    - configuration
-    - percona-server
-    - percona-server-ib-logfile
+#- include: ib-logfile.yml
+#  tags:
+#    - configuration
+#    - percona-server
+#    - percona-server-ib-logfile
 
 - name: start and enable service
   service:

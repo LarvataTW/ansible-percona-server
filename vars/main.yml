@@ -24,6 +24,7 @@ percona_server_dependencies:
   - python3-mysqldb
   - python-mysqldb
   - debconf-utils
+  - mysql-client
 
 percona_server_lock_path: /var/lib/ansible/percona-server/lock
 
