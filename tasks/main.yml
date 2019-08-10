@@ -1,5 +1,24 @@
 # tasks file for percona-server
 ---
+
+- name: Stop and disable apparmor
+  service:
+    name: apparmor
+    state: stopped
+    enabled: no
+
+- name: Remove Apparmor
+  apt:
+    name: apparmor
+    state: absent
+
+- name: Unlock hard nofile limits for wildcard domain
+  pam_limits:
+    domain: '*'
+    limit_type: hard
+    limit_item: nofile
+    value: unlimited
+
 - include: version-support.yml
   tags:
     - configuration
