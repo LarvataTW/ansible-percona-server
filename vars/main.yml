@@ -20,11 +20,12 @@ percona_server_dependencies:
   - percona-xtradb-cluster-garbd-3.x
   - percona-xtradb-cluster-galera-3.x-dbg
   - percona-xtradb-cluster-garbd-3.x-dbg
-  - libmysqlclient18
   - python3-mysqldb
   - python-mysqldb
   - debconf-utils
   - mysql-client
+  - libmysqlclient-dev
+  - libmysqlclient20
 
 percona_server_lock_path: /var/lib/ansible/percona-server/lock
 
