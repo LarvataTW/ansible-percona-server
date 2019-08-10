@@ -29,6 +29,7 @@ percona_server_dependencies:
   - "percona-server-server-{{ percona_server_version }}"
   - "{{ percona_server_libmysqlclient_map[percona_server_version] }}"
   - python-mysqldb
+  - python3-mysqldb
 
 percona_server_lock_path: /var/lib/ansible/percona-server/lock
 
