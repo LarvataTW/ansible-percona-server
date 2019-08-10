@@ -13,7 +13,7 @@ percona_server_debconf_selections:
     value: "{{ percona_server_root_password }}"
     vtype: password
 
-percona_server_dependencies:
+percona_server_packages:
   - "percona-xtradb-cluster-server-{{ percona_server_version }}"
   - "percona-xtradb-cluster-test-{{ percona_server_version }}"
   - "percona-xtradb-cluster-{{ percona_server_version }}-dbg"

@@ -21,9 +21,6 @@ percona_server_user_root_cnf_preset:
         value: "'{{ percona_server_root_password }}'"
 percona_server_user_root_cnf: "{{ percona_server_user_root_cnf_preset }}"
 
-percona_server_install:
-  - xtrabackup
-
 percona_server_ssl_map: {}
 
 percona_server_plugins_present: []

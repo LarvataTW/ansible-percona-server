@@ -11,19 +11,11 @@
   tags:
     - percona-server-install-configure-debconf
 
-- name: install | dependencies
+- name: install | packages
   apt:
     name: "{{ item }}"
     state: "{{ apt_install_state | default('latest') }}"
     update_cache: yes
-  with_items: "{{ percona_server_dependencies }}"
+  with_items: "{{ percona_server_packages }}"
   tags:
-    - percona-server-install-dependencies
-
-- name: install | additional
-  apt:
-    name: "{{ item }}"
-    state: "{{ apt_install_state | default('latest') }}"
-  with_items: "{{ percona_server_install }}"
-  tags:
-    - percona-server-install-additional
+    - percona-server-install-packages
