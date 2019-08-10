@@ -16,6 +16,6 @@
 {% endfor %}
 {% endfor %}
 
-{% if percona_server_etc_my_cnf_includedir is defined %}
-!includedir {{ percona_server_etc_my_cnf_includedir }}
-{% endif %}
+{% for item in percona_server_etc_my_cnf_includedir %}
+!includedir {{ item }}
+{% endfor %}
