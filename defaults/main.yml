@@ -67,6 +67,5 @@ percona_server_wsrep_sst_method: 'xtrabackup-v2'
 percona_server_wsrep_sst_user: 'sst_user'
 percona_server_wsrep_sst_password: 'sst_password'
 
-is_percona_server_sst_user_ready: false
 is_percona_server_wsrep_primary_node: false
 is_percona_server_wsrep_force_initial: false

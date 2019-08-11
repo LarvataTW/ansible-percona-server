@@ -35,7 +35,6 @@ Base on [percona-server](https://www.percona.com/software/mysql-database/percona
 * `percona_server_pxc_strict_mode`: 'DISABLED' # DISABLED, PERMISSIVE, ENFORCING, MASTER
 * `is_percona_server_wsrep_force_initial`: false
 * `is_percona_server_wsrep_primary_node`: false # set `true` on primary node
-* `is_percona_server_sst_user_ready`: false # set `true` after primary node initial
 
 ##### SSL
 

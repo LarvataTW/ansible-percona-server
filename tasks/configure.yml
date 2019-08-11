@@ -40,7 +40,6 @@
       service:
         name: mysql
         state: stopped
-
     - name: cluster | config | set grastate.dat file
       lineinfile:
         dest: /var/lib/mysql/grastate.dat
@@ -48,24 +47,13 @@
         line: 'safe_to_bootstrap: 1'
         state: present
       when: is_percona_server_wsrep_primary_node
-
     - name: cluster | service | start primary node
       command: service mysql bootstrap-pxc
       when: is_percona_server_wsrep_primary_node
       register: cluster_service_start_primary_node
-
   when: _mysqld_installed.rc != 0 or is_percona_server_wsrep_force_initial
   tags:
-    - percona-server-cluster-initial-startup
-
-- name: Start Percona XtraDB Cluster Other Nodes
-  block:
-    - name: cluster | service | start other nodes
-      service:
-        name: mysql
-        state: started
-      when: not is_percona_server_wsrep_primary_node
-  when: _mysqld_installed.rc == 0 and is_percona_server_sst_user_ready
+    - percona-server-cluster-initial
 
 - name: configure | update (root) configuration file
   template:
