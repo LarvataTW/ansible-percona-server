@@ -17,9 +17,11 @@
     service:
       name: mysql
       state: stopped
-    when: _mysqld_installed.rc != 0
     tags:
       - percona-server-configure-first-run-service-stop
+  when: _mysqld_installed.rc != 0
+  tags:
+    - percona-server-configure-first-run
 
 - name: configure | update (global) configuration file
   template:
@@ -53,6 +55,24 @@
   when: _mysqld_installed.rc != 0
   tags:
     - percona-server-configure-first-run
+
+- name: Initial Startup of Percona XtraDB Cluster Nodes
+  block:
+    - name: cluster | service | stop
+      service:
+        name: mysql
+        state: stopped
+    - name: cluster | service | start primary node
+      command: service mysql bootstrap-pxc
+      when: is_percona_server_wsrep_primary_node
+    - name: cluster | service | start other nodes
+      service:
+        name: mysql
+        state: started
+      when: not is_percona_server_wsrep_primary_node
+  when: _mysqld_installed.rc != 0
+  tags:
+    - percona-server-cluster-initial-startup
 
 - name: configure | update (root) configuration file
   template:

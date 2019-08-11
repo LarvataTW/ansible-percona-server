@@ -32,6 +32,7 @@ Base on [percona-server](https://www.percona.com/software/mysql-database/percona
 * `percona_server_wsrep_sst_method`: 'xtrabackup-v2'
 * `percona_server_wsrep_sst_auth`: 'sstuser:sst_password'
 * `percona_server_pxc_strict_mode`: 'DISABLED' # DISABLED, PERMISSIVE, ENFORCING, MASTER
+* `is_percona_server_wsrep_primary_node`: false # set `true` on primary node
 
 ##### SSL
 
