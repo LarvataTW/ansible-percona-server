@@ -58,13 +58,17 @@ percona_server_zoneinfo_tz_name: 'Asia/Taipei'
 percona_server_zoneinfo_command: "mysql_tzinfo_to_sql {{ percona_server_zoneinfo_tz_dir }}"
 
 percona_server_toolkit_udfs_manage: true
+percona_server_pxc_strict_mode: 'DISABLED' # DISABLED, PERMISSIVE, ENFORCING, MASTER
 
 percona_server_wsrep_cluster_address: 'gcomm://0.0.0.0'
 percona_server_wsrep_cluster_name: 'larvata-pxc-cluster'
+
 percona_server_wsrep_slave_threads: 16
+
 percona_server_wsrep_sst_method: 'xtrabackup-v2'
 percona_server_wsrep_sst_user: 'sst_user'
 percona_server_wsrep_sst_password: 'sst_password'
-percona_server_pxc_strict_mode: 'DISABLED' # DISABLED, PERMISSIVE, ENFORCING, MASTER
+
+is_percona_server_sst_user_ready: false
 is_percona_server_wsrep_primary_node: false
 is_percona_server_wsrep_force_initial: false
