@@ -24,6 +24,15 @@ Base on [percona-server](https://www.percona.com/software/mysql-database/percona
 * `percona_server_user_root_cnf_manage`: [default: `true`]: Whether or not to manage `~root/.my.cnf`
 * `percona_server_user_root_cnf`: [default: `percona_server_user_root_cnf_preset`, see `defaults/main.yml`]: Root user configuration declarations
 
+##### WSREP
+
+* `percona_server_wsrep_cluster_address`: 'gcomm://0.0.0.0'
+* `percona_server_wsrep_cluster_name`: 'larvata-pxc-cluster'
+* `percona_server_wsrep_slave_threads`: 16
+* `percona_server_wsrep_sst_method`: 'xtrabackup-v2'
+* `percona_server_wsrep_sst_auth`: 'sstuser:sst_password'
+* `percona_server_pxc_strict_mode`: 'DISABLED' # DISABLED, PERMISSIVE, ENFORCING, MASTER
+
 ##### SSL
 
 * `percona_server_ssl_map`: [default: `{}`]: SSL declarations

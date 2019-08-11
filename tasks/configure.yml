@@ -32,6 +32,17 @@
   tags:
     - percona-server-configure-global-my-cnf
 
+- name: configure | update (cluster) configuration file
+  template:
+    src: etc/mysql/percona-xtradb-cluster.conf.d/wsrep.cnf.j2
+    dest: /etc/mysql/percona-xtradb-cluster.conf.d/wsrep.cnf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart percona-server
+  tags:
+    - percona-server-configure-cluster-wsrep-cnf
+
 - block:
   - name: configure | service | start
     service:
