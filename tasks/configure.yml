@@ -17,6 +17,7 @@
     service:
       name: mysql
       state: stopped
+    when: _mysqld_installed.rc != 0
     tags:
       - percona-server-configure-first-run-service-stop
 
