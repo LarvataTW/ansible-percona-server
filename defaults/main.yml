@@ -31,13 +31,13 @@ percona_server_databases_absent:
   # Remove test database
   - name: test
 
-percona_server_users_present:
-  - name: "{{ percona_server_wsrep_sst_user }}"
-    password: "{{ percona_server_wsrep_sst_password }}"
-    privs:
-      - '*.*:RELOAD,LOCK TABLES,PROCESS,REPLICATION CLIENT'
-percona_server_users_present_hosts:
-  - 'localhost'
+percona_server_users_present: []
+  #- name: "{{ percona_server_wsrep_sst_user }}"
+  #  password: "{{ percona_server_wsrep_sst_password }}"
+  #  privs:
+  #    - '*.*:RELOAD,LOCK TABLES,PROCESS,REPLICATION CLIENT'
+percona_server_users_present_hosts: []
+  #  - 'localhost'
 
 percona_server_users_absent:
   # Remove anonymous users
