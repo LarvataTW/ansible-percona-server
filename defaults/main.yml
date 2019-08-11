@@ -31,7 +31,11 @@ percona_server_databases_absent:
   # Remove test database
   - name: test
 
-percona_server_users_present: []
+percona_server_users_present:
+  - name: sstuser
+    password: 'sst_password'
+    privs:
+      - '*.*:RELOAD,LOCK TABLES,PROCESS,REPLICATION CLIENT'
 percona_server_users_present_hosts:
   - 'localhost'
 
