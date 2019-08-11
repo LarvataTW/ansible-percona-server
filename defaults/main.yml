@@ -32,8 +32,8 @@ percona_server_databases_absent:
   - name: test
 
 percona_server_users_present:
-  - name: sstuser
-    password: 'sst_password'
+  - name: "{{ percona_server_wsrep_sst_user }}"
+    password: "{{ percona_server_wsrep_sst_password }}"
     privs:
       - '*.*:RELOAD,LOCK TABLES,PROCESS,REPLICATION CLIENT'
 percona_server_users_present_hosts:
@@ -63,7 +63,8 @@ percona_server_wsrep_cluster_address: 'gcomm://0.0.0.0'
 percona_server_wsrep_cluster_name: 'larvata-pxc-cluster'
 percona_server_wsrep_slave_threads: 16
 percona_server_wsrep_sst_method: 'xtrabackup-v2'
-percona_server_wsrep_sst_auth: 'sstuser:sst_password'
+percona_server_wsrep_sst_user: 'sst_user'
+percona_server_wsrep_sst_password: 'sst_password'
 percona_server_pxc_strict_mode: 'DISABLED' # DISABLED, PERMISSIVE, ENFORCING, MASTER
 is_percona_server_wsrep_primary_node: false
-is_percona_server_wsrep_force_initial: true
+is_percona_server_wsrep_force_initial: false

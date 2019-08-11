@@ -30,7 +30,8 @@ Base on [percona-server](https://www.percona.com/software/mysql-database/percona
 * `percona_server_wsrep_cluster_name`: 'larvata-pxc-cluster'
 * `percona_server_wsrep_slave_threads`: 16
 * `percona_server_wsrep_sst_method`: 'xtrabackup-v2'
-* `percona_server_wsrep_sst_auth`: 'sstuser:sst_password'
+* `percona_server_wsrep_sst_user`: 'sst_user'
+* `percona_server_wsrep_sst_password`: 'sst_password'
 * `percona_server_pxc_strict_mode`: 'DISABLED' # DISABLED, PERMISSIVE, ENFORCING, MASTER
 * `is_percona_server_wsrep_primary_node`: false # set `true` on primary node
 
