@@ -63,7 +63,7 @@ Base on [percona-server](https://www.percona.com/software/mysql-database/percona
 * `percona_server_databases_present.{n}.collation`: [optional, default: `utf8mb4_general_ci`]: The collation of the database
 * `percona_server_databases_present.{n}.encoding`: [optional, default: `utf8mb4`]: The character set of the database
 
-* `percona_server_databases_absent`: [default: `[{name: test}]`]: Databases to `DROP`
+* `percona_server_databases_absent`: [default: `[]`]: Databases to `DROP`
 * `percona_server_databases_absent.{n}.name`: [required]: The name of the database
 
 ##### Users
@@ -80,7 +80,7 @@ Base on [percona-server](https://www.percona.com/software/mysql-database/percona
 * `percona_server_users_absent.{n}.name`: [required]: The name of the user
 * `percona_server_users_absent.{n}.hosts`: [optional, default: `percona_server_users_absent_hosts`]: Hosts to `DROP` privileges for (e.g. `%`)
 
-* `percona_server_users_absent_hosts`: [default: `[{{ ansible_hostname }}, 127.0.0.1, localhost, ::1, %]`]: Hosts to `DROP` privileges for
+* `percona_server_users_absent_hosts`: [default: `[]`]: Hosts to `DROP` privileges for
 
 ##### Queries
 
