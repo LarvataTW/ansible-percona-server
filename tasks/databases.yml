@@ -4,7 +4,7 @@
   mysql_db:
     name: "{{ item.name }}"
     collation: "{{ item.collation | default('utf8mb4_general_ci') }}"
-    encoding: "{{ item.encoding | default('utf8') }}"
+    encoding: "{{ item.encoding | default('utf8mb4_general_ci') }}"
     state: present
   with_items: "{{ percona_server_databases_present }}"
   tags:
