@@ -70,7 +70,7 @@
         name: mysql
         state: started
       when: not is_percona_server_wsrep_primary_node
-  when: _mysqld_installed.rc != 0
+  when: _mysqld_installed.rc != 0 or is_percona_server_wsrep_force_initial
   tags:
     - percona-server-cluster-initial-startup
 
