@@ -35,7 +35,6 @@
     - configuration
     - percona-server
     - percona-server-configure
-  notify: restart percona-server
 
 - include: toolkit-udfs.yml
   tags:
