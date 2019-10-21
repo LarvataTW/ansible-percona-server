@@ -52,6 +52,7 @@
       when: is_percona_server_wsrep_primary_node
       register: cluster_service_start_primary_node
   when: _mysqld_installed.rc != 0 or is_percona_server_wsrep_force_initial
+  notify: restart percona-server
   tags:
     - percona-server-cluster-initial
 
