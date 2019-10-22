@@ -39,7 +39,7 @@ percona_server_toolkit_udfs_manage: true
 percona_server_pxc_strict_mode: 'DISABLED' # DISABLED, PERMISSIVE, ENFORCING, MASTER
 
 percona_server_wsrep_cluster_address: 'gcomm://0.0.0.0'
-percona_server_wsrep_cluster_name: 'larvata-pxc-cluster'
+percona_server_wsrep_cluster_name: 'pxc-cluster'
 
 percona_server_wsrep_slave_threads: 16
 
@@ -63,6 +63,7 @@ percona_server_users_present: []
 percona_server_users_present_hosts:
   - 'localhost'
   - '127.0.0.1'
+  - '192.168.%'
 
 percona_server_users_absent:
   - name: ''
