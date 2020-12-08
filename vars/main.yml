@@ -14,7 +14,7 @@ percona_server_debconf_selections:
     vtype: password
 
 percona_server_packages:
-  - percona-xtradb-cluster-full
+  - percona-xtradb-cluster-full-57
   - python3-mysqldb
   - python-mysqldb
   - debconf-utils
