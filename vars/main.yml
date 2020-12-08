@@ -14,18 +14,10 @@ percona_server_debconf_selections:
     vtype: password
 
 percona_server_packages:
-  - "percona-xtradb-cluster-server-{{ percona_server_version }}"
-  - "percona-xtradb-cluster-test-{{ percona_server_version }}"
-  - "percona-xtradb-cluster-{{ percona_server_version }}-dbg"
-  - percona-xtradb-cluster-garbd-3.x
-  - percona-xtradb-cluster-galera-3.x-dbg
-  - percona-xtradb-cluster-garbd-3.x-dbg
+  - percona-xtradb-cluster-full
   - python3-mysqldb
   - python-mysqldb
   - debconf-utils
-  - mysql-client
-  - libmysqlclient-dev
-  - libmysqlclient20
 
 percona_server_lock_path: /var/lib/ansible/percona-server/lock
 
