@@ -1,4 +1,4 @@
-# tasks file for percona-server
+# tasks file
 ---
 - name: install | configure debconf
   debconf:
@@ -11,11 +11,16 @@
   tags:
     - percona-server-install-configure-debconf
 
-- name: install | packages
+- name: install | dependencies
   apt:
-    name: "{{ item }}"
+    name: "{{ percona_server_dependencies }}"
     state: "{{ apt_install_state | default('latest') }}"
-    update_cache: yes
-  with_items: "{{ percona_server_packages }}"
   tags:
-    - percona-server-install-packages
+    - percona-server-install-dependencies
+
+- name: install | additional
+  apt:
+    name: "{{ percona_server_install }}"
+    state: "{{ apt_install_state | default('latest') }}"
+  tags:
+    - percona-server-install-additional
