@@ -1,10 +1,10 @@
-# tasks file for percona-server
+# tasks file
 ---
 - name: databases | create
   mysql_db:
     name: "{{ item.name }}"
-    collation: "{{ item.collation | default('utf8mb4_general_ci') }}"
-    encoding: "{{ item.encoding | default('utf8mb4') }}"
+    collation: "{{ item.collation | default('utf8_general_ci') }}"
+    encoding: "{{ item.encoding | default('utf8') }}"
     state: present
   with_items: "{{ percona_server_databases_present }}"
   tags:
