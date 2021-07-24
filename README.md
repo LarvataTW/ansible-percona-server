@@ -1,28 +1,21 @@
 ## percona-xtradb-cluster
 
-Base on [percona-server](https://www.percona.com/software/mysql-database/percona-server) role.
+
+Base on role [oefenweb.percona_server](https://github.com/Oefenweb/ansible-percona-server/).
+
+Set up a [percona-xtradb-cluster](https://www.percona.com/doc/percona-xtradb-cluster/8.0/install/apt.html#apt) in Debian-like systems.
 
 #### Requirements
 
 * `python-mysqldb` (will be installed)
 * `python3-mysqldb` (will be installed)
 * `libmysqlclient18` (will be installed)
-* `tee` (will not be installed)
 
 #### Variables
 
 ##### General
 
-* `percona_server_version`: [default: `5.7`]: Version to install
-* `percona_server_root_password`: [default: `+12345678`]: Root password **Make sure to change!**
-
-* `percona_server_install`: [`['xtrabackup']`]: Additional packages to install
-
-* `percona_server_etc_my_cnf`: [default: `[]`]: Global configuration declarations
-* `percona_server_etc_my_cnf_includedir`: [optional]: Used to include other option files from this directory (e.g. `/etc/mysql/conf.d/`)
-
-* `percona_server_user_root_cnf_manage`: [default: `true`]: Whether or not to manage `~root/.my.cnf`
-* `percona_server_user_root_cnf`: [default: `percona_server_user_root_cnf_preset`, see `defaults/main.yml`]: Root user configuration declarations
+* `percona_server_version`: [default: `8.0`]: Version to install
 
 ##### WSREP
 
@@ -33,8 +26,44 @@ Base on [percona-server](https://www.percona.com/software/mysql-database/percona
 * `percona_server_wsrep_sst_user`: 'sst_user'
 * `percona_server_wsrep_sst_password`: 'sst_password'
 * `percona_server_pxc_strict_mode`: 'DISABLED' # DISABLED, PERMISSIVE, ENFORCING, MASTER
-* `is_percona_server_wsrep_force_initial`: false
+* `is_percona_server_wsrep_force_initial`: false   
 * `is_percona_server_wsrep_primary_node`: false # set `true` on primary node
+
+##### Databases
+
+* `percona_server_databases_present.{n}.collation`: [optional, default: `utf8mb4_general_ci`]: The collation of the database
+* `percona_server_databases_present.{n}.encoding`: [optional, default: `utf8mb4`]: The character set of the database
+
+---
+
+## percona-server
+
+[![CI](https://github.com/Oefenweb/ansible-percona-server/workflows/CI/badge.svg)](https://github.com/Oefenweb/ansible-percona-server/actions?query=workflow%3ACI)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-percona--server-blue.svg)](https://galaxy.ansible.com/Oefenweb/percona_server)
+
+Set up a [percona-server](https://www.percona.com/software/mysql-database/percona-server) server in Debian-like systems.
+
+#### Requirements
+
+* `python-mysqldb(2|3)` (will be installed)
+* `tee` (will not be installed)
+* `software-properties-common` (will be installed)
+* `dirmngr` (will be installed)
+
+#### Variables
+
+##### General
+
+* `percona_server_version`: [default: `5.7`]: Version to install (e.g. `5.6`)
+* `percona_server_root_password`: [default: `+eswuw9uthUteFreyAqu`]: Root password **Make sure to change!**
+
+* `percona_server_install`: [`['xtrabackup']`]: Additional packages to install
+
+* `percona_server_etc_my_cnf`: [default: `[]`]: Global configuration declarations
+* `percona_server_etc_my_cnf_includedir`: [optional]: Used to include other option files from this directory (e.g. `/etc/mysql/conf.d/`)
+
+* `percona_server_user_root_cnf_manage`: [default: `true`]: Whether or not to manage `~root/.my.cnf`
+* `percona_server_user_root_cnf`: [default: `percona_server_user_root_cnf_preset`, see `defaults/main.yml`]: Root user configuration declarations
 
 ##### SSL
 
@@ -59,10 +88,10 @@ Base on [percona-server](https://www.percona.com/software/mysql-database/percona
 
 * `percona_server_databases_present`: [default: `[]`]: Databases to `CREATE`
 * `percona_server_databases_present.{n}.name`: [required]: The name of the database
-* `percona_server_databases_present.{n}.collation`: [optional, default: `utf8mb4_general_ci`]: The collation of the database
-* `percona_server_databases_present.{n}.encoding`: [optional, default: `utf8mb4`]: The character set of the database
+* `percona_server_databases_present.{n}.collation`: [optional, default: `utf8_general_ci`]: The collation of the database
+* `percona_server_databases_present.{n}.encoding`: [optional, default: `utf8`]: The character set of the database
 
-* `percona_server_databases_absent`: [default: `[]`]: Databases to `DROP`
+* `percona_server_databases_absent`: [default: `[{name: test}]`]: Databases to `DROP`
 * `percona_server_databases_absent.{n}.name`: [required]: The name of the database
 
 ##### Users
@@ -79,7 +108,7 @@ Base on [percona-server](https://www.percona.com/software/mysql-database/percona
 * `percona_server_users_absent.{n}.name`: [required]: The name of the user
 * `percona_server_users_absent.{n}.hosts`: [optional, default: `percona_server_users_absent_hosts`]: Hosts to `DROP` privileges for (e.g. `%`)
 
-* `percona_server_users_absent_hosts`: [default: `[]`]: Hosts to `DROP` privileges for
+* `percona_server_users_absent_hosts`: [default: `[{{ ansible_hostname }}, 127.0.0.1, localhost, ::1, %]`]: Hosts to `DROP` privileges for
 
 ##### Queries
 
@@ -91,8 +120,8 @@ Base on [percona-server](https://www.percona.com/software/mysql-database/percona
 
 * `percona_server_zoneinfo_manage`: [default: `false`]: Whether or not to load time zone tables
 * `percona_server_zoneinfo_tz_dir`: [default: `/usr/share/zoneinfo`]: The zoneinfo directory path name
-* `percona_server_zoneinfo_tz_file`: [default: `'/usr/share/zoneinfo/Asia/Taipei'`]: The path of a single time zone file (e.g. `/usr/share/zoneinfo/Europe/Amsterdam`)
-* `percona_server_zoneinfo_tz_name`: [default: `'Asia/Taipei'`]: A time zone name (e.g. `Europe/Amsterdam`)
+* `percona_server_zoneinfo_tz_file`: [default: `''`]: The path of a single time zone file (e.g. `/usr/share/zoneinfo/Europe/Amsterdam`)
+* `percona_server_zoneinfo_tz_name`: [default: `''`]: A time zone name (e.g. `Europe/Amsterdam`)
 * `percona_server_zoneinfo_command`: [default: `mysql_tzinfo_to_sql {{ percona_server_zoneinfo_tz_dir }}`]: The zoneinfo command to generate SQL (e.g. `mysql_tzinfo_to_sql {{ percona_server_zoneinfo_tz_file }} {{ percona_server_zoneinfo_tz_name }}`, `mysql_tzinfo_to_sql --leap {{ {{ percona_server_zoneinfo_tz_file }} }}`)
 
 ##### Toolkit UDFs
