@@ -1,16 +1,10 @@
-# defaults file for percona-server
+# defaults file
 ---
-is_percona_server_wsrep_primary_node: false
-is_percona_server_wsrep_force_initial: false
-
 percona_server_version: 5.7
 
-percona_server_root_password: '+12345678'
+percona_server_root_password: '+eswuw9uthUteFreyAqu'
 
 percona_server_etc_my_cnf: []
-percona_server_etc_my_cnf_includedir:
-  - /etc/mysql/conf.d/
-  - /etc/mysql/percona-xtradb-cluster.conf.d/
 
 percona_server_user_root_cnf_manage: true
 percona_server_user_root_cnf_preset:
@@ -22,10 +16,34 @@ percona_server_user_root_cnf_preset:
         value: root
       - name: password
         value: "'{{ percona_server_root_password }}'"
-
 percona_server_user_root_cnf: "{{ percona_server_user_root_cnf_preset }}"
 
+percona_server_install:
+  - "percona-xtrabackup{{ '-80' if percona_server_version is version('8', '>=') else '-24' if percona_server_version is version('5.7', '>=') else '' }}"
+
 percona_server_ssl_map: {}
+
+percona_server_plugins_present: []
+percona_server_plugins_absent: []
+
+percona_server_databases_present: []
+percona_server_databases_absent:
+  # Remove test database
+  - name: test
+
+percona_server_users_present: []
+percona_server_users_present_hosts:
+  - 'localhost'
+
+percona_server_users_absent:
+  # Remove anonymous users
+  - name: ''
+percona_server_users_absent_hosts:
+  - "{{ ansible_hostname }}"
+  - '127.0.0.1'
+  - 'localhost'
+  - '::1'
+  - '%'
 
 percona_server_queries: []
 
@@ -36,41 +54,23 @@ percona_server_zoneinfo_tz_name: 'Asia/Taipei'
 percona_server_zoneinfo_command: "mysql_tzinfo_to_sql {{ percona_server_zoneinfo_tz_dir }}"
 
 percona_server_toolkit_udfs_manage: true
+
+##############################
+### percona-xtradb-cluster ###
+##############################
+
+is_percona_server_wsrep_primary_node: false
+is_percona_server_wsrep_force_initial: false
+
+percona_server_etc_my_cnf_includedir:
+  - /etc/mysql/percona-xtradb-cluster.conf.d/
+
 percona_server_pxc_strict_mode: 'DISABLED' # DISABLED, PERMISSIVE, ENFORCING, MASTER
 
 percona_server_wsrep_cluster_address: 'gcomm://0.0.0.0'
 percona_server_wsrep_cluster_name: 'pxc-cluster'
-
 percona_server_wsrep_slave_threads: 16
 
 percona_server_wsrep_sst_method: 'xtrabackup-v2'
 percona_server_wsrep_sst_user: 'sst_user'
 percona_server_wsrep_sst_password: 'sst_password'
-
-percona_server_plugins_present: []
-percona_server_plugins_absent: []
-
-percona_server_databases_present: []
-percona_server_databases_absent: []
-  #- name: test
-
-percona_server_users_present: []
-  #- name: "{{ percona_server_wsrep_sst_user }}"
-  #  password: "{{ percona_server_wsrep_sst_password }}"
-  #  privs:
-  #    - '*.*:RELOAD,LOCK TABLES,PROCESS,REPLICATION CLIENT'
-
-percona_server_users_present_hosts:
-  - 'localhost'
-  - '127.0.0.1'
-  - '192.168.%'
-
-percona_server_users_absent:
-  - name: ''
-
-percona_server_users_absent_hosts: []
-  #- "{{ ansible_hostname }}"
-  #- '127.0.0.1'
-  #- 'localhost'
-  #- '::1'
-  #- '%'
