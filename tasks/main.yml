@@ -1,16 +1,15 @@
-# tasks file for percona-server
+# tasks file
 ---
-
-- include: pre-setup.yml
-  tags:
-    - ubuntu
-    - setup
-
 - include: version-support.yml
   tags:
     - configuration
     - percona-server
     - percona-server-version-support
+
+- include: pre-setup.yml
+  tags:
+    - setup
+    - percona-xtradb-cluster
 
 - include: first-run.yml
   tags:
@@ -74,11 +73,11 @@
     - percona-server
     - percona-server-queries
 
-#- include: ib-logfile.yml
-#  tags:
-#    - configuration
-#    - percona-server
-#    - percona-server-ib-logfile
+- include: ib-logfile.yml
+  tags:
+    - configuration
+    - percona-server
+    - percona-server-ib-logfile
 
 - name: start and enable service
   service:
